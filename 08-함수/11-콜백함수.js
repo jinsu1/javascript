@@ -4,19 +4,19 @@ function something(x, y, cb) {
 
 }
 
-function plus(a,b) {
-    return a+b;
-}
+// function plus(a,b) {
+//     return a+b;
+// }
 
-let minus = (a, b) => a-b;
+// let minus = (a, b) => a-b;
 
-something(100, 50, plus);
-something(100, 50, minus);
-console.log(minus);
+// something(100, 50, plus);
+// something(100, 50, minus);
+// console.log(minus);
 
-something(200, 100, function(a, b) {
-    return a * b;
-});
+// something(200, 100, function(a, b) {
+//     return a * b;
+// });
 
 
 something(5, 7, (a, b) => {
