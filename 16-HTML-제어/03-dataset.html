@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button type="button" class="mybtn" data-name="javascript" data-age="20" data-color="#f60" data-background="#060">javascript;20</button>
+    <button type="button" class="mybtn" data-name="vanilla" data-age="15" data-color="#f6f" data-background="#990">javascript;15</button>
+
+    <h1 id="console"></h1>
+
+    <script>
+        document.querySelectorAll('.mybtn').forEach((v, i) => {
+            v.addEventListener('click', (e) => {
+                e.currentTarget.dataset.helloworld = '안녕히세요.';
+                const name = e.currentTarget.dataset.name;
+                const age = e.currentTarget.dataset.age;
+                document.getElementById('console').innerHTML = '이름: ' + name + ', 나이: ' + age;
+            });
+        });
+
+        document.querySelectorAll('*[data-color]').forEach((v, i) => {
+            v.style.color = v.dataset.color;
+        });
+
+        document.querySelectorAll('*[data-background]').forEach((v, i) => {
+            v.style.backgroundColor = v.dataset.background;
+        });
+    </script>
+</body>
+</html>

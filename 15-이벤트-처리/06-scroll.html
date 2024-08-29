@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .box1 {
+        height: 2000px;
+        background: linear-gradient(0deg, #c9dcfe 0, #223ff6 100%);
+    }
+</style>
+<body>
+    <div id="container"><div class="box1"></div></div>
+
+    <script>
+        window.addEventListener("scroll", (e) => {
+            const scrollTop = window.scrollY;
+            const windowHeight = window.screen.availHeight;
+            const documentHeight = document.body.scrollHeight;
+
+            console.log(`스크롤이 발생하고 있음: scrollTop=${scrollTop}, documentHeight=${documentHeight}, windowHeight=${windowHeight}`);
+
+            if(scrollTop + windowHeight >= documentHeight) {
+                console.log("스크롤이 맨 끝에 도착함");
+                const container = document.querySelector("#container");
+                container.innerHTML += '<div class="box1"></div>';
+            }
+        });
+    </script>
+</body>
+</html>

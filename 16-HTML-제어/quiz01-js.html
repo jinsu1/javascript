@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="date"></div>
+
+    <script>
+        let dateArr = [];
+
+        function clock () {
+            let date = new Date();
+            dateArr[0] = date.getFullYear();
+            dateArr[1] = date.getMonth();
+            dateArr[2] = date.getDay();
+
+            dateArr[3] = date.getHours();
+            dateArr[4] = date.getMinutes();
+            dateArr[5] = date.getSeconds();
+            
+            for(let i=0; i < dateArr.length; i++) {
+                dateArr[i] = dateArr[i] < 10 ? "0"+dateArr[i] : dateArr[i];
+            }
+            document.querySelector("#date").innerHTML = `${dateArr[0]}-${dateArr[1]}-${dateArr[2]} ${dateArr[3]}:${dateArr[4]}:${dateArr[5]}`
+        }
+        clock();
+        setInterval(clock, 1000);
+    </script>
+</body>
+</html>

@@ -1,5 +1,6 @@
 class MyClass {
     #age;
+    
     #name;
 
     constructor() {

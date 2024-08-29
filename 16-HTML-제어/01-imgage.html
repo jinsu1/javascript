@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .img-list {
+            list-style: none;
+            padding: 0;
+            width:640px;
+            margin:auto;
+            display:flex;
+
+            li {
+                flex: 1 0 20%;
+                a{
+                    display:block;
+                    margin:10px;
+
+                    img {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+
+        .viewer {
+            width: 620px;
+            margin: auto;
+            padding: 0 10%;
+
+            img {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <ul class="img-list">
+        <li>
+            <a href="img/img01.jpg" title="테스트 이미지 1" class="link">
+                <img src="img/img01.jpg" />
+            </a>
+        </li>
+        <li>
+            <a href="img/img02.jpg" title="테스트 이미지 2" class="link">
+                <img src="img/img02.jpg" />
+            </a>
+        </li>
+        <li>
+            <a href="img/img03.jpg" title="테스트 이미지 3" class="link">
+                <img src="img/img03.jpg" />
+            </a>
+        </li>
+        <li>
+            <a href="img/img04.jpg" title="테스트 이미지 4" class="link">
+                <img src="img/img04.jpg" />
+            </a>
+        </li>
+        <li>
+            <a href="img/img05.jpg" title="테스트 이미지 5" class="link">
+                <img src="img/img05.jpg" />
+            </a>
+        </li>
+    </ul>
+
+    <div class="viewer">
+        <img src="img/img01.jpg" id="target" />
+    </div>
+    
+    <script>
+        document.querySelectorAll(".link").forEach((v, i) => {
+            console.log(`${i}번째 원소`);
+            console.log(v);
+
+            v.addEventListener('click', e => {
+                e.preventDefault();
+
+                const src = e.currentTarget.getAttribute("href");
+                const title = e.currentTarget.getAttribute("title");
+                
+                const target = document.querySelector("#target");
+                target.setAttribute("src", src);
+                target.setAttribute("alt", title);
+                
+            });
+        });
+    </script>
+</body>
+</html>
