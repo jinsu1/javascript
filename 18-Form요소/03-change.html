@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <select name="site" id="site">
+        <option value="">--- 선택하세요 ===</option>
+        <option value="http://www.naver.com">네이버</option>
+        <option value="http://www.daum.net">다음</option>
+        <option value="http://www.google.com">구글</option>
+    </select>
+
+    <hr />
+
+    <input type="text" id="src" />
+    <input type="text" id="dsc" readonly />
+
+    <hr />
+    <input type="text" id="keycheck" />
+    <p id="keycopy"></p>
+
+    <script>
+        document.querySelector("#site").addEventListener("change", e =>{
+            const choose = e.currentTarget.selectedIndex;
+            const value = e.currentTarget[choose].value;
+
+            if(value) {
+               window.open(value); 
+            }
+        });
+
+        document.querySelector("#src").addEventListener("keyup", e => {
+            document.querySelector("#dsc").value = e.currentTarget.value;
+        });
+
+        document.querySelector("#keycheck").addEventListener("keyup", e => {
+            document.querySelector("#keycopy").innerHTML = e.currentTarget.value;
+        });
+    </script>
+</body>
+</html>

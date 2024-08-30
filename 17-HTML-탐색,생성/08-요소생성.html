@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #list{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+
+            .item {
+                padding: 5px 10px;
+                cursor: pointer;
+                border-bottom: 1px dotted #d5d5d5;
+
+                &:first-child {
+                    border-top: 1px dotted #d5d5d5;
+                }
+
+                &.blue {
+                    background-color: #06f2;
+                }
+
+                &.orange {
+                    background-color: #f602;
+                }
+
+                &.pink {
+                    background-color: #f0f2;
+                }
+            }
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="comment" />
+    <button type="button" id="appendChild">appenChild</button>
+    <button type="button" id="insertBefore1">insertBefore1</button>
+    <button type="button" id="insertBefore2">insertBefore2</button>
+    <hr />
+
+    <ul id="list"></ul>
+
+    <script>
+        const list =  document.querySelector('#list');
+
+        const comment = document.querySelector('#comment');
+
+        const getItem = (clsName) => {
+            const li = document.createElement('li');
+            li.classList.add('item', clsName);
+            li.innerHTML = comment.value;
+
+            li.addEventListener('click', (e) => {
+                e.currentTarget.remove();
+            });
+
+            return li;
+        };
+
+        document.querySelector('#appendChild').addEventListener('click', (e) => {
+            const li = getItem('blue');
+
+            list.appendChild(li);
+        });
+
+        document.querySelector('#insertBefore1').addEventListener('click', (e) => {
+            list.insertBefore(getItem('orange'), null);
+        });
+
+        document.querySelector('#insertBefore2').addEventListener('click', (e) => {
+            list.insertBefore(getItem('pink'), document.querySelector('li:first-child'));
+        });
+
+    </script>
+</body>
+</html>

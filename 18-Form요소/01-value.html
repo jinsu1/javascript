@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="https://megastudyacademy.co.kr" id="myform">
+        <div>
+            <label for="username">사용자이름</label>
+            <input type="text" name="username" id="username" />
+        </div>
+        <div>
+            <label for="userpass">비밀번호</label>
+            <input type="text" name="userpass" id="userpass" />
+        </div>
+        <button type="submit" id="btn">입력값 확인</button>
+        <hr />
+
+        <div id="result"></div>
+    </form>
+
+    <script>
+        const myform = document.querySelector("#myform");
+
+        myform.addEventListener("submit", e => { 
+            // if문 등으로 적합성 검사를 할 때에는 e.preventDefault();로 html태그의 기본 옵션을 막아두고 
+            // 적합성 검사가 끝난 뒤 e.currentTarget.submt();으로 다시 실행 시켜야 함
+            e.preventDefault();
+
+            const username = document.querySelector("#username");
+            const userpass = document.querySelector("#userpass");
+
+            if(!username.value) {
+                alert("사용자 이름을 입력하세요.");
+                username.focus();
+
+                return;
+            }
+
+            if(!userpass.value) {
+                alert("비밀번호를 입력하세요.");
+                userpass.focus();
+                
+                return;
+            }
+
+            document.querySelector("#result").innerHTML = "사용자이름: " + username.value + "<br/>비밀번호: " +userpass.value;
+
+            e.currentTarget.submit();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="list">
+        <li id="one">One</li>
+        <li id="two" class="blue">
+            Two
+            <ul>
+                <li id="a">A</li>
+                <li id="b" class="blue">B</li>
+                <li id="c" class="red">C</li>
+                <li id="d">D</li>
+            </ul>
+        </li>
+        <li id="three">Three</li>
+        <li id="four" class="blue">Four</li>
+    </ul>
+
+    <button type="button" id="btn1">상위 ul의 자식들</button>
+    <button type="button" id="btn2">Two의 하위 ul의 자식들</button>
+
+    <script>
+        document.querySelector('#btn1').addEventListener('click', (e) => {
+            console.log(document.querySelector('#list').childNodes);
+
+            console.log(document.querySelector('#list').children);
+
+            const children = document.querySelector('#list').children;
+
+            const childrenArr = Array.from(children);
+            console.log(childrenArr);
+
+            childrenArr.forEach((v, i) => {
+                v.style.backgroundColor = "#0066ff"
+            });
+        });
+
+        document.querySelector("#btn2").addEventListener('click', (e) => {
+            const childrenArr = Array.from(document.querySelector("#two > ul").children);
+
+            childrenArr.forEach((v, i) => {
+                v.style.fontWeight = '900';
+            });
+        });
+        
+    </script>
+</body>
+</html>
