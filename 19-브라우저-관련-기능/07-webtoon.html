@@ -89,18 +89,17 @@
         console.group("데이터 확인");
         console.log(webtoon);
         console.groupEnd();
-
         //querystring을 객체로 변환
-        const weekdayData = new URLSearchParams(location.search);
+        // const weekdayData = new URLSearchParams(location.search);
+        // console.log('weekdayData: ' + weekdayData);
 
         //생성된 객체를 JSON으로 변환
-        const { weekday } = Object.fromEntries(weekdayData);
+        const weekday  = Object.fromEntries(new URLSearchParams(location.search)).weekday;
         /*
-        const weekday = {mon: [...]}
+        const weekday = mon;
         */
-        const webtoonData = Object.fromEntries(weekdayData);
+    //    const weekday2 = Object.fromEntries('aa'+weekdayData.weekday)
         console.log(`weekday: ${weekday}`)
-        console.log(`webtoonData: ${webtoonData}`);
 
         document.querySelectorAll('.gnb a').forEach((v, i) => {
             console.log(`v.dataset.weekday: ${v.dataset.weekday}`);
