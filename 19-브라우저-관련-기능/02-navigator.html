@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        dt {
+            font-weight: bold;
+            margin: 10px 0;
+            font-size: 20px;
+        }
+
+        dt:before {
+            content: '*';
+            padding-right: 5px;
+        }
+
+        dd {
+            font-weight:normal;
+            margin-bottom: 30px;
+            border-left: 5px solid #d5d5d5;
+            padding-left: 15px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <dl id="navigator-list"></dl>
+
+    <script>
+        const navigatorList = document.querySelector('#navigator-list');
+
+        const dt1 = document.createElement("dt");
+        dt1.innerHTML = "브라우저 이름";
+        navigatorList.appendChild(dt1);
+
+        
+        const dd1 = document.createElement("dd");
+        dd1.innerHTML = navigator.appName;
+        navigatorList.appendChild(dd1);
+        
+        const dt2 = document.createElement("dt");
+        dt1.innerHTML = "브라우저 코드명";
+        navigatorList.appendChild(dt2);
+
+
+    </script>
+</body>
+</html>

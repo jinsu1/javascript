@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input[disabled] {
+            background-color: #d5d5d5;
+        }
+    </style>
+</head>
+<body>
+    <label for="username"> 입력하기 <input type="checkbox" id="input_enable" /></label>
+    <input type="text" name="input" id="input" disabled />
+
+    <script>
+        document.querySelector("#input_enable").addEventListener("change", e => {
+            document.querySelector("#input").disabled = !e.currentTarget.checked;
+        });
+    </script>
+</body>
+</html>

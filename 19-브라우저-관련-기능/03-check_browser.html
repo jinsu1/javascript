@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="browser"></h1>
+    <h1 id="mobile"></h1>
+
+    <script>
+        function getWebBrowserName() {
+            let agt = navigator.userAgent.toLowerCase();
+
+            if(agt.indexOf('edge') != -1) {
+                return 'Edge';
+            } else if (agt.indexOf('chrome') != -1) {
+                return 'Chrome';
+            } else if (agt.indexOf('netscape') != -1 ) {
+                return 'Netscape';
+            } else {
+                return 'Unknown';
+            }
+        }
+
+        function isMobile() {
+            let tmpUser = navigator.userAgent.toLowerCase();
+            let isMobile = false;
+
+            if(tmpUser.indexOf("iphone") > -1 || tmpUser.indexOf("ipad") > -1 || tmpUser.indexOf("ipod") >  -1 || tmpUser.indexOf("android") > -1) {
+                isMobile = true;
+            }
+
+            return isMobile;
+        }
+
+        document.getElementById("browser").innerHTML = getWebBrowserName();
+        document.getElementById("mobile").innerHTML = isMobile();
+    </script>
+</body>
+</html>

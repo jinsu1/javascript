@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label>전체선택<input type="checkbox" id="all_check" data-checked=".hobby" /></label>
+    <hr />
+    <label><input type="checkbox" class="hobby" value="soccor">축구</label>
+    <label><input type="checkbox" class="hobby" value="basketball">농구</label>
+    <label><input type="checkbox" class="hobby" value="baseball">야구</label>
+
+    <br />
+
+    <label>전체선택<input type="checkbox" id="all_check2" data-checked=".food" /></label>
+    <hr />
+    <label><input type="checkbox" class="food" value="a">a</label>
+    <label><input type="checkbox" class="food" value="b">b</label>
+    <label><input type="checkbox" class="food" value="c">c</label>
+
+    <script>
+        document.querySelectorAll("input[data-checked]").forEach((v, i) => {
+            v.addEventListener('change', e => {
+                const current = e.currentTarget;
+                const targetSelector = current.dataset.checked;
+                console.log(targetSelector);
+                document.querySelectorAll(targetSelector).forEach((v2, i2) => {
+                    v2.checked = current.checked;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

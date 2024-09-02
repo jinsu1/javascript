@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="myform">
+        <label><input type="checkbox" class="hobby" value="soccor">축구</label>
+        <label><input type="checkbox" class="hobby" value="basketball">농구</label>
+        <label><input type="checkbox" class="hobby" value="baseball">야구</label>
+        <button type="button" id="btn">입력값 확인</button>
+    </form>
+
+    <hr />
+
+    <p id="console"></p>
+
+    <script>
+        const checkbox = document.querySelectorAll(".hobby");
+
+        checkbox.forEach( (v, i) => {
+            v.addEventListener('change', e => {
+                const div = document.querySelector("#console");
+                div.innerHTML = e.currentTarget.value;
+                div.innerHTML += e.currentTarget.checked ? "체크됨" : "체크 해제됨";
+            });
+        });
+
+        document.querySelector("#btn").addEventListener("click", e => {
+            const checkedItem = Array.from(checkbox).filter((v, i) => v.checked);
+            console.log(checkedItem);
+
+            const checkedValue = checkedItem.map((v, i) => v.value) 
+
+            document.querySelector("#console").innerHTML = checkedValue;
+        });
+    </script>
+</body>
+</html>

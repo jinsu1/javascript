@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="myform">
+        <h3>주민번호를 입력하세요.</h3>
+        <input type="text"  name="jumin1" id="jumin1" class="jumin" />
+        ---
+        <input type="password"  name="jumin2" id="jumin2" class="jumin" />
+    </form>
+
+    <script>
+        document.querySelectorAll(".jumin").forEach((v, i) => {
+            v.addEventListener("focus", e => {
+                e.currentTarget.style.backgroundColor = '#006';
+                e.currentTarget.style.color = '#fff';
+            });
+
+            v.addEventListener("blur", e => {
+                e.currentTarget.style.backgroundColor = '#fff';
+                e.currentTarget.style.color = "#000";
+            });
+        });
+
+        document.querySelector("#jumin1").addEventListener('keyup', e => {
+            const value = e.currentTarget.value;
+
+            if(value.length >= 6) {
+                e.currentTarget.value = value.substring(0, 6);
+                document.querySelector("#jumin2").focus();
+            }
+        });
+    </script>
+</body>
+</html>
