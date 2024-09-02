@@ -93,12 +93,12 @@
         // const weekdayData = new URLSearchParams(location.search);
         // console.log('weekdayData: ' + weekdayData);
 
-        //생성된 객체를 JSON으로 변환
+        //생성된 객체를 JSON으로 변환 객체(object는 Json과 다름 자세한 내용은 블로그에서)
+        //변환하지않으면 undefinded 출력됨
         const weekday  = Object.fromEntries(new URLSearchParams(location.search)).weekday;
         /*
         const weekday = mon;
         */
-    //    const weekday2 = Object.fromEntries('aa'+weekdayData.weekday)
         console.log(`weekday: ${weekday}`)
 
         document.querySelectorAll('.gnb a').forEach((v, i) => {
