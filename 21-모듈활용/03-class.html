@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button type="button" id="kor">KOR</button>
+    <button type="button" id="eng">ENG</button>
+    <h1 id="msg"></h1>
+
+    <script src="js/MyClass.js"></script>
+    <script>
+        document.querySelector("#kor").addEventListener('click', e => {
+            document.querySelector("#msg").innerHTML = my.kor();
+        });
+
+        document.querySelector("#eng").addEventListener('click', e => {
+            document.querySelector("#msg").innerHTML = my.eng();
+        });
+    </script>
+</body>
+/html>

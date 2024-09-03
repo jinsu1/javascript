@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .form-horizontal {
+            border: 5px solid #d5d5d5;
+            width: 500px;
+            margin: auto;
+            padding: 0 10px;
+            font-size: 14px;
+        }
+
+        .field-container {
+            display: flex;
+            width: 100%;
+            margin: 15px 0;
+            align-items: center;
+        }
+
+        .field-title {
+            width: 25%;
+            display: block;
+        }
+
+        .field-content {
+            width: 75%;
+            display: block;
+        }
+
+        .field-content .form-control {
+            width: 100%;
+            padding: 5px 0;
+            font-size: 14px;
+            border: 1px solid #eee;
+        }
+
+        .field-content input[type='checkbox'], .field-content inputp[type='radio'] {
+            margin-left: 10px;
+        }
+
+        .identify{
+            font-size: 16px;
+            color: #f00;
+            font-weight: 500;
+            vertical-align: middle;
+
+        }
+
+        .button-container {
+            margin: 20px auto;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!--- 가입폼 시작 --->
+    <form class="form-horizontal" name="join_form" id="join_form">
+        <div class="field-container">
+            <label for="user_id" class="field-title">아이디 <span class="identify">*</span></label>
+            <div class="field-content">
+                <input type="text" name="user_id" id="user_id" class="form-control" />
+            </div>
+        </div>
+        <div class="field-container">
+            <label for="user_pw" class="field-title">비밀번호 <span class="identify">*</span></label>
+            <div class="field-content">
+                <input type="password" name="user_pw" id="user_pw" class="form-control" />
+            </div>
+        </div>
+        <div class="field-container">
+            <label for="user_pw" class="field-title">비밀번호 확인 <span class="identify">*</span></label>
+            <div class="field-content">
+                <input type="password" name="user_pw_re" id="user_pw_re" class="form-control" />
+            </div>
+        </div>
+        <div class="field-container">
+            <label for="user_name" class="field-title">이름 <span class="identify">*</span></label>
+            <div class="field-content">
+                <input type="text" name="user_name" id="user_name" class="form-control" />
+            </div>
+        </div>
+        <div class="field-container">
+            <label for="email" class="field-title">이메일 <span class="identify">*</span></label>
+            <div class="field-content">
+                <input type="email" name="email" id="email" class="form-control" />
+            </div>
+        </div>
+        <div class="field-container">
+            <label for="tel" class="field-title">연락처 <span class="identify">*</span></label>
+            <div class="field-content">
+                <input type="tel" name="tel" id="tel" class="form-control" />
+            </div>
+        </div>
+        <div class="field-container">
+            <label for="gender1" class="field-title">성별 <span class="identify">*</span></label>
+            <div class="field-content">
+                <label><input type="radio" name="gender" id="gender1" value="M" />남자</label>
+                <label><input type="radio" name="gender" id="gender2" value="F" />여자</label>
+            </div>
+        </div>
+        <div class="field-container">
+            <label for="gender1" class="field-title">수강과목 <span class="identify">*</span></label>
+            <div class="field-content">
+                <label><input type="checkbox" name="subject" id="subject1" value="html" />HTML</label>
+                <label><input type="checkbox" name="subject" id="subject2" value="css" />CSS</label>
+                <label><input type="checkbox" name="subject" id="subject3" value="js" />Javascript</label>
+                <label><input type="checkbox" name="subject" id="subject4" value="jquery" />jQuery</label>
+                <label><input type="checkbox" name="subject" id="subject5" value="php" />PHP</label>
+            </div>
+        </div>
+        <div class="button-container">
+            <button type="subject">가입하기</button>
+            <button type="reset">다시작성</button>
+        </div>
+    </form>
+
+    <!-- 정규표현식 검사 객체를 참조하여 추가한다. -->
+     <script src="js/RegexHelper.js"></script>
+     <script>
+        document.querySelector("#join_form").addEventListener("submit", e => {
+            e.preventDefault();
+
+            try {
+                /** 아이디 검사 */
+                regexHelper.value('#user_id', '아이디를 입력하세요.');
+                regexHelper.value('#user_pw', '비밀번호를 입력하세요.');
+                regexHelper.value('#user_pw_re', '비밀번호 확인값을 입력하세요.');
+                regexHelper.value('#user_name', '이름을 입력하세요.');
+                regexHelper.value('#email', '이메일을 입력하세요.');
+                regexHelper.value('#tel', '연락처를 입력하세요.');
+            } catch(e) {
+                alert(e.message);
+                console.error(e);
+                e.element.value = "";
+                e.element.focus();
+                return;
+            }
+
+            alert("입력형식 검사 완료");
+        });
+     </script>
+</body>
+</html>

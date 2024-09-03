@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>쿠키 읽기/쓰기</h1>
+    <div>
+        <select id="cookie_name">
+            <option value="name">name</option>
+            <option value="age">age</option>
+        </select>
+        <select id="cookie_time">
+            <option value="">none</option>
+            <option value="0">0</option>
+            <option value="5">5s</option>
+            <option value="10">10s</option>
+            <option value="30">30</option>
+        </select>
+        <input type="text" id="cookie_var" />
+        <button type="button" id="save">save</button>
+        <button type="button" id="read">read</button>
+    </div>
+
+    <script>
+        document.querySelector("#save").addEventListener("click", e => {
+
+        const cookieName = document.querySelector("#cookie_name");
+        const cookieNameChoose = cookieName[cookieName.selectedIndex].value;
+
+        const cookieTime = document.querySelector("#cookie_time");
+        const cookieTimeChoose = cookieTime[cookieTime.selectedIndex].value;
+
+        const cookieVar = document.querySelector("#cookie_var");
+        const cookieVarValue = cookieVar.value;
+
+        let cookie_str = encodeURIComponent(cookieNameChoose) + "=" + encodeURIComponent(cookieVarValue) + ";";
+        cookie_str += "path=/;";
+
+        if(cookieTimeChoose) {
+            cookie_str += "max-age=" + cookieTimeChoose + ";";
+        }
+
+        console.log(cookie_str);
+        document.cookie = cookie_str;
+        });
+
+        document.querySelector("#read").addEventListener('click', e => {
+            alert(document.cookie);
+        });
+    </script>
+</body>
+</html>

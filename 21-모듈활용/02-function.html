@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <field>
+            <legend>
+                <div>
+                    <label for="x"></label>
+                    <input type="text" id="x" />
+                </div>
+                <div>
+                    <label for="y"></label>
+                    <input type="text" id="y" />
+                </div>
+                <div>
+                    <button type="button" id="plusButton">+</button>
+                    <button type="button" id="minusButton">-</button>
+                    <button type="button" id="timesButton">*</button>
+                    <button type="button" id="divideButton">/</button>
+                </div>
+                <h1 id="result"></h1>
+            </legend>
+        </field>
+    </form>
+
+    <script src="js/function.js"></script>
+    <script>
+        const x = document.querySelector("#x");
+        const y = document.querySelector("#y");
+        const result = document.querySelector("#result");
+
+        const plusButton = document.querySelector("#plusButton");
+        plusButton.addEventListener("click", e => {
+            const value = plus(parseInt(x.value), parseInt(y.value));
+            result.innerHTML = value;
+        });
+
+        const minusButton = document.querySelector("#minusButton");
+        minusButton.addEventListener("click", e => {
+            const value = minus(parseInt(x.value), parseInt(y.value));
+            result.innerHTML = value;
+        });
+
+        const timesButton = document.querySelector("#timesButton");
+        timesButton.addEventListener("click", e => {
+            const value = times(parseInt(x.value), parseInt(y.value));
+            result.innerHTML = value;
+        });
+
+        const divideButton = document.querySelector("#divideButton");
+        divideButton.addEventListener("click", e => {
+            const value = divide(parseInt(x.value), parseInt(y.value));
+            result.innerHTML = value;
+        });
+    </script>
+</body>
+</html>
