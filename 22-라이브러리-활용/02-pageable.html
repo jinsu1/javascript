@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/pageable@latest/dist/pageable.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        /* box-sizin: border-box;를 사용할 경우 
+        가로 스크롤바가 생성되기 때문에
+        라이브러리의 css를 강제로 덮어씌어야 함*/
+
+        .pg-wrapper {
+            box-sizing: content-box;
+        }
+
+        .page {
+            box-sizing: border-box;
+            width:100%;
+            height:100%;
+
+            display:flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .page h1 {
+            color: #fff;
+            font-size: 64px;
+        }
+
+        .page1 {
+            background-color: #3f51b5;
+        }
+
+        .page2 {
+            background-color: #673ab7;
+        }
+
+        .page3 {
+            background-color: #9c27b0;
+        }
+
+        .video-background {
+            background-color: #06f2;
+            position: relative;
+            width:100%;
+            height:100%;
+        }
+
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-background .video-overray {
+            position: absolute;
+            left:0;
+            top:0;
+            z-index: 100;
+            width:100%;
+            height:100%;
+
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size:48px;
+            color:#fff;
+            text-shadow: 0 1px #000;
+        }
+
+        .video-background .video-overray h1 {
+            margin: 0;
+        }
+
+        .video-background .video-overray p {
+            border-top: 1px solid #fff;
+            margin:0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div data-anchor="Page 1">
+            <div class="page page1 video-background">
+                <video src="assets/media/intro.mp4" autoplay muted loop></video>
+                <div class="video-overray">
+                    <h1 data-aos="fade-up" data-aos-duration="500">Hello Wrold</h1>
+                    <p data-aos="fade-up" data-aos-duration="500" data-aos-delay="300">Video Background Examplee</p>
+                </div>
+            </div>
+        </div>
+        <div data-anchor="Page 2">
+            <div class="page page2">
+                <h1>Page2</h1>
+            </div>
+        </div>
+        <div data-anchor="Page 3">
+            <div class="page page3">
+                <h1>Page3</h1>
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/pageable@latest/dist/pageable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        new Pageable(".container");
+        AOS.init();
+    </script>
+</body>
+</html>

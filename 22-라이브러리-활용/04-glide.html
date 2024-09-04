@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/glider-js/1.7.9/glider.css">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+        }
+
+        .glider-container {
+            width:100%;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .glider-container .glider,
+        .glider-container .glider div,
+        .glider-container .glider div img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .glider-container .glider div img {
+            object-fit: cover;
+        }
+
+        .glider-prev, .glider-next {
+            position: absolute;
+            left:30px;
+            top:50%;
+            font-size:100px;
+            color:#fff;
+            transform: translateY(-50%);
+            z-index: 999;
+        }
+
+        .glider-next {
+            left:auto;
+            right: 30px;
+        }
+
+        .dots {
+            position: absolute;
+            left:50%;
+            bottom:30px;
+            z-index: 999;
+            font-size: 80px;
+            transform: translateX(-50%);
+        }
+
+        .glider-dot{
+            background-color: #fff;
+        }
+
+        .glider-dot.active {
+            background-color: #ff0;
+        }
+    </style>
+</head>
+<body>
+    <div class="glider-container">
+        <div class="glider">
+            <div><img src="assets/img/slide1.jpg" /></div>
+            <div><img src="assets/img/slide2.jpg" /></div>
+            <div><img src="assets/img/slide3.jpg" /></div>
+            <div><img src="assets/img/slide4.jpg" /></div>
+        </div>
+
+        <button aria-label="Previous" class="glider-prev"><</button>
+        <button aria-label="Next" class="glider-next">></button>
+        <div role="tablist" class="dots"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/glider-js/1.7.9/glider.min.js"></script>
+
+    <script>
+        new Glider(document.querySelector(".glider"), {
+            slidesToShow:1,
+            dots: ".dots",
+            draggable: false,
+            rewind: true,
+            arrows: {
+                prev: ".glider-prev",
+                next: ".glider-next",
+            },
+        });
+    </script>
+</body>
+</html>

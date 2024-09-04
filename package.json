@@ -9,6 +9,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "aos": "^3.0.0-beta.6",
     "prompt-sync": "^4.2.0"
   }
 }

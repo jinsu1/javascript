@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.13.1/sweetalert2.min.css">
+    <title>Document</title>
+    <style>
+        .title {
+            color: white;
+            font-size: 36px;
+            text-shadow: 0 1px #000;
+        }
+
+        .content {
+            color: white;
+            font-size: 18px;
+            text-shadow: 0 1px #000;
+        }
+
+        .swal_contents {
+            width: 300px;
+            margin-bottom: 15px;
+        }
+
+        .swal_textarea{
+                width: 300px;
+                height: 100px;
+            }
+    </style>
+</head>
+<body>
+    <button id="btn1" type="button">button1</button>
+    <button id="btn2" type="button">button2</button>
+    <button id="btn3" type="button">button3</button>
+    <button id="btn4" type="button">button4</button>
+    <button id="btn5" type="button">button5</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.13.1/sweetalert2.all.min.js"></script>
+    <script>
+        document.querySelector("#btn1").addEventListener('click', e => {
+            new Swal('성공적으로 처리되었습니다.');
+        });
+
+        document.querySelector("#btn2").addEventListener('click', e => {
+            // (제목, 내용, 아이콘)
+            // 아이콘 --> 'success', 'warning', 'info', 'question', 'error'
+            new Swal("탈퇴확인", "정말 탈퇴하시겠습니까?", "question");
+        });
+
+        document.querySelector("#btn3").addEventListener('click', e => {
+            new Swal({
+                title: '<font color="red">에러</font>', //제목
+                html:"요청하신 처리에 실패하였습니다. <br/>관리자에게 문의 바랍니다.", // 내용
+                icon: "error", //아이콘
+                showCloseButton: true, // 오른쪽 상단 x 버튼 유무
+                confirmButtonText: "확인", // 확인버튼 문구
+                showCancelButton: true, // 취소버튼 유무
+                cancelButtonText: "취소", // 취소버튼 문구
+                cancelButtonColor: "#f60", //취소버튼 색상
+            }).then( (result => {
+                // 버튼이 눌러졌을 경우 콜백 연결 console.log(result)로 찍어보면 어떤 값들이 변경되는지 볼 수 있음
+                if(result.value) {
+                    // 확인 버튼이 눌러진 경우
+                    new Swal({
+                        title: "문의하기", 
+                        html: '<input type="text" class="swal_contents" placeholder="작성자" /></label><br/><textarea type="text" class="swal_textarea" placeholder="문의내용"></textarea>', 
+                        icon: 'info',
+                        showCloseButton: true,
+                        confirmButton: "전송",
+                        showCancelButton: true,
+                        }).then( e => {
+                            if(e.value) {
+                                
+                                new Swal('성공적으로 처리되었습니다.');
+                            } else {
+                                new Swal("취소", "취소되었습니다.", "error");            
+                            }
+                        });
+                } else if (result.dismiss === "cancel") {
+                    //취소버튼이 눌러진 경우
+                    new Swal("취소", "취소되었습니다.", "error");
+                }
+            }));
+        });
+
+        document.querySelector("#btn4").addEventListener("click", e => {
+            new Swal({
+                title: "Thank you!",
+                html: "성원에 감사드립니다.",
+                imageUrl: "assets/img/img5.png", //이미지 넣기
+                imageWidth: 480,
+                imageHeight: 240
+            });
+        });
+
+
+        document.querySelector("#btn5").addEventListener("click", e => {
+            new Swal({
+            title: '<span class="title">Thank you!</span>',
+            html: '<span class="content">성원에 감사드립니다.</span>',
+            width: 600,
+            padding: "100px",
+            background: "#fff url(assets/img/img5.png) center center/cover no-repeat",
+            });
+        });
+    </script>
+</body>
+</html>
