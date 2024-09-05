@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            border-bottom: 1px dotted #ccc;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            display:flex;
+        }
+
+        .container a {
+            display: block;
+            margin-right:30px;
+        }
+
+        .text-success {
+            color: #06f;
+            font-size: 24px;   
+        }
+
+        text-primary {
+            color: #070;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple Get</h1>
+    <div class="container">
+        <a href="http://localhost:3001/hello.html">move to hello.html</a>
+        <a href="#" id=btn1>Promise Load</a>
+        <a href="#" id="btn2">Async Await Load</a>
+    </div>
+    <div id="result"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // Promise 방식의 Ajax 요청
+        document.querySelector("#btn1").addEventListener('click', e => {
+            e.preventDefault();
+
+            console.log("Loading...");
+
+            const url = "http://localhost:3001/hello.html";
+
+            axios.get(url)
+            .then((response) => {
+                console.log(response.data);
+
+                const result = document.querySelector("#result");
+
+                result.insertAdjacentHTML("beforeend", response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+                alert(error.message);
+            })
+            .finally( () => {
+                console.log("Finish");
+            });
+        });
+
+        // Async Await 방식의 Ajax 요청(권장)
+        document.querySelector("#btn2").addEventListener("click", async e => {
+            e.preventDefault();
+
+            console.log("Loading...");
+
+            const url = "http://localhost:3001/world.html";
+
+            let response = null;
+
+            try {
+                response = await axios.get(url);
+                console.log(response.data);
+            } catch (error) {
+                console.error(error);
+                alert(error.message);
+
+                //catch에서 return을 하더라도 finally는 실행된다.
+                return;
+            } finally {
+                console.log("Finish");
+            }
+
+            const result = document.querySelector("#result");
+            result.insertAdjacentHTML("beforeBegin", response.data);
+        });
+    </script>
+</body>
+</html>

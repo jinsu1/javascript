@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #loading {
+            width: 100px;
+            height: 100px;
+            background: url(img/loading.gif) no-repeat center/cover;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, 50%);
+            z-index: 999999999;
+            display:none;
+        }
+
+        #loading.active {
+            display:block;
+        }
+
+        dt {
+            font-weight: bold;
+            margin: 10px 0;
+            font-size: 20px;
+        }
+
+        dt:before {
+            content: 'o';
+            padding:5px
+        }
+
+        dd {
+            font-weight: normal;
+            margin-bottom: 30px;
+            border-left: 5px #d5d5d5 solid;
+            padding-left: 15px;
+            font-size: 16px;
+        }
+
+        #container {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="loading"></div>
+    <h1>Async Await Axios</h1>
+    
+    <a href="#" class="mylink" data-deptno="101">컴퓨터공학과</a>
+    <a href="#" class="mylink" data-deptno="102">멀티미디어학과</a>
+    <a href="#" class="mylink" data-deptno="201">전자공학과</a>
+    <a href="#" class="mylink" data-deptno="202">기계공학과</a>
+
+    <dl id="container">
+        <dt>학과번호</dt>
+        <dd class="id"></dd>
+        <dt>학과명</dt>
+        <dd class="dname"></dd>
+        <dt>학과위치</dt>
+        <dd class="loc"></dd>
+    </dl>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const mylink = document.querySelectorAll(".mylink");
+
+        //링크개체에 대한 반복 처리
+        mylink.forEach((v, i) => {
+            //각각의 링크객체에게 click이벤트 정의
+            v.addEventListener("click", async (e) => {
+                e.preventDefault();
+                const loading = document.querySelector("#loading");
+                loading.classList.add('active');
+
+                //링크에 숨겨진 data-deptno의 값을 가져옴
+                const deptno = e.currentTarget.dataset.deptno;
+                console.log(deptno);
+
+                let response = null;
+
+                try {
+                    response = await axios.get(`http://localhost:3001/department/${deptno}`);
+                    console.log(response.data);
+                } catch (error) {
+                    console.error(`[Error Code] ${error.code}`);
+                    console.error(`[Error message] ${error.message}`);
+                    let alertMsg = error.message;
+
+                    //http 상태메세지가 포함되어 있다면 해당 내용을 에러 문자열에 추가
+                    if(error.response !== undefined) {
+                        const errorMsg = `${error.response.status} error - ${error.response.statusText}`;
+                        console.error(`[HTTP Status] ${errorMsg}`);
+                        alertMsg += `\n${errorMsg}`;
+                    }
+
+                    alert(alertMsg);
+                    return;
+                } finally {
+                    loading.classList.remove('active');
+                }
+                //Ajax의 응답결과를 구조분해하여 개별 변수로 추출
+                const { id, dname, loc } = response.data;
+
+                document.querySelector('.id').innerHTML = id;
+                document.querySelector('.dname').innerHTML = dname;
+                document.querySelector('.loc').innerHTML = loc;
+                document.querySelector('#container').style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>

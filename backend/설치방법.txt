@@ -1,0 +1,10 @@
+[설치방법]
+
+> npm install -g json-server@0.17.2
+
+24/01/21 기준 최신 버전에서 CROS 문제가 발생
+
+
+[삭제방법]
+
+> npm uninstall -g json-server

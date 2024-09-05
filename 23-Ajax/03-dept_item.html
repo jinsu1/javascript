@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #loading {
+            width: 100px;
+            height: 100px;
+            background: url(img/loading.gif) no-repeat center/cover;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, 50%);
+            z-index: 999999999;
+            display:none;
+        }
+
+        #loading.active {
+            display:block;
+        }
+
+        dt {
+            font-weight: bold;
+            margin: 10px 0;
+            font-size: 20px;
+        }
+
+        dt:before {
+            content: "@";
+            padding-right: 5px;
+        }
+
+        dd {
+            font-weight: normal;
+            margin-bottom: 30px;
+            border-left: 5px solid #d5d5d5;
+            padding-left: 15px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div id="loading"></div>
+    <h1>Department Item</h1>
+    
+    <dl>
+        <dt>학과번호</dt>
+        <dd class="id"></dd>
+        <dt>학과명</dt>
+        <dd class="dname"></dd>
+        <dt>학과위치</dt>
+        <dd class="loc"></dd>
+    </dl>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        (async () => {
+            const loading = document.querySelector("#loading");
+            loading.classList.add('active');
+
+            let response = null;
+
+            try {
+                response = await axios.get(`http://localhost:3001/department-item`);
+                console.log(response.data);
+            } catch (error) {
+                console.error(`[Error Code] ${error.code}`);
+                console.error(`[Error message] ${error.message}`);
+                let alertMsg = error.message;
+
+                //http 상태메세지가 포함되어 있다면 해당 내용을 에러 문자열에 추가
+                if(error.response !== undefined) {
+                    const errorMsg = `${error.response.status} error - ${error.response.statusText}`;
+                    console.error(`[HTTP Status] ${errorMsg}`);
+                    alertMsg += `\n${errorMsg}`;
+                }
+
+                alert(alertMsg);
+                return;
+            } finally {
+                loading.classList.remove('active');
+            }
+
+            //Ajax의 응답결과를 구조분해하여 개별 변수로 추출
+            const { id, dname, loc } = response.data
+
+            //추출한 결과를 미리 준비한 HTML 구조에 출력하고 컨테이너를 화면에 표시함
+            document.querySelector('.id').innerHTML = id;
+            document.querySelector('.dname').innerHTML = dname;
+            document.querySelector('.loc').innerHTML = loc;
+        })();
+    </script>
+</body>
+</html>

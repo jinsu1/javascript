@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .text-success {
+            color: #06f;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple Json</h1>
+    <a href="#" id="btn">load hello.json</a>
+    <div id="result"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.querySelector("#btn").addEventListener("click", async e => {
+            e.preventDefault();
+
+            console.log("loading..");
+
+            const url = "http://localhost:3001/hello";
+            let response = null;
+
+            try {
+                response = await axios.get(url);
+
+                console.log(response.data);
+            } catch (error) {
+                console.error(`[Error Code] ${error.code}`);
+                console.error(`[Error message] ${error.message}`);
+                let alertMsg = error.message;
+
+                //http 상태메세지가 포함되어 있다면 해당 내용을 에러 문자열에 추가
+                if(error.response !== undefined) {
+                    const errorMsg = `${error.response.status} error - ${error.response.statusText}`;
+                    console.error(`[HTTP Status] ${errorMsg}`);
+                    alertMsg += `\n${errorMsg}`;
+                }
+
+                alert(alertMsg);
+                return;
+            } finally {
+                console.log("Finish");
+            }
+
+            //동적으로 h1태그 생성 
+            const h1 = document.createElement("h1");
+            h1.classList.add("text-success");
+            h1.innerHTML = response.data.msg;
+            document.querySelector("#result").appendChild(h1);
+        });
+    </script>
+</body>
+</html>
