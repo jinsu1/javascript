@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학과관리 ::: MySchool</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+    <div class="container">
+        <!--header-->
+        <header>
+            <h1>학과관리</h1>
+            <hr />
+        </header>
+        <!--body-->
+        <section>
+            <form name="form" id="department-form">
+                <input type="text" name="id" id="id" />
+
+                <div class="form-group">
+                    <label for="dname"> 학과이름 <span class="text-danger">*</span></label>
+                    <div>
+                        <input type="text" name="dname" id="dname" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="loc"> 학과위치</label>
+                    <div>
+                        <input type="text" name="loc" id="loc" />
+                    </div>
+                </div>
+                <hr />
+                <div class="text-center">
+                    <button type="submit">저장하기</button>
+                    <button type="reset">다시작성</button>
+                </div>
+            </form>
+        </section>
+        <!--footer-->
+        <footer>
+            <hr />
+            <address>copyright&copy;2024. megastudy</address>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="assets/js/UtilHelper.js"></script>
+
+    <script>
+               //페이지가 실행되면서 바로 동작해야하므로 즉시실행함수형태로 구현
+               (async () => {
+            //GET 파라미터 받기
+            const params = utilHelper.getQuery();
+
+            //파라미터가 정상적이지 않으므로 메세지 출력, 전페이지이동처리 후 수행 중단
+            if(!params.id) {
+                alert('학과번호가 없습니다.');
+                history.back();
+                return;
+            }
+
+            //ajax 요청
+            let response = null;
+
+            try {
+                response = await axios.get(`http://localhost:3001/department/${params.id}/`);
+                console.log(response.data);
+            } catch (e) {
+                console.error(e);
+                alert('요청을 처리하는데 실패했습니다.');
+                return;
+            }
+
+            document.querySelector('#id').value = response.data.id;
+            document.querySelector('#dname').value = response.data.dname;
+            document.querySelector('#loc').value = response.data.loc;
+        })();
+
+        //수정 버튼의 submit 이벤트
+        document.querySelector("#department-form").addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const id = document.querySelector("#id").value;
+            const dname = document.querySelector("#dname").value;
+            const loc = document.querySelector("#loc").value;
+            console.log(id);
+            
+            try {
+                await axios.put(`http://localhost:3001/department/${id}/`, {
+                    dname: dname,
+                    loc: loc,
+                });
+            } catch (e) {
+                console.error(e);
+                alert('요청을 처리하는데 실패했습니다.');
+                return;
+            }
+
+            window.location = `view.html?id=${id}`;
+        });
+    </script>
+</body>
+</html>
